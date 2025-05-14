@@ -9,7 +9,7 @@ namespace SpaceAPI.Database
 
         public async Task InsertPhotoAsync(SpacePhoto sp)
         {
-            var sql = "INSERT INTO PUBLIC.\"PhotoSearch\" (\"title\", \"date\", \"explanation\", \"url\")"+
+            var sql = $"INSERT INTO PUBLIC.\"{Constants.DBName}\" (\"title\", \"date\", \"explanation\", \"url\")"+
                 "VALUES (@title, @date, @explanation, @url)";
             NpgsqlCommand cmd = new NpgsqlCommand(sql, _connection);
 
@@ -27,7 +27,7 @@ namespace SpaceAPI.Database
             List<SpacePhoto> photolist = new List<SpacePhoto>();
             await _connection.OpenAsync();
             var sql = "SELECT \"title\", \"date\", \"explanation\", \"url\" " +
-                "FROM public.\"PhotoSearch\"";
+                $"FROM public.\"{Constants.DBName}\"";
 
             NpgsqlCommand cmd = new NpgsqlCommand(sql, _connection);
             NpgsqlDataReader npgsqlData = await cmd.ExecuteReaderAsync();
@@ -47,7 +47,7 @@ namespace SpaceAPI.Database
         }
         public async Task EditPhotoAsync(string title, string explanation, string date)
         {
-            var sql = "UPDATE public.\"PhotoSearch\" " +
+            var sql = $"UPDATE public.\"{Constants.DBName}\" " +
                 "SET \"title\" = @title, \"explanation\" = @explanation " +
                 "WHERE \"date\" = @date";
 
@@ -63,7 +63,7 @@ namespace SpaceAPI.Database
         }
         public async Task DeletePhotoAsync(string date)
         {
-            var sql = "DELETE FROM public.\"PhotoSearch\" " +
+            var sql = $"DELETE FROM public.\"{Constants.DBName}\" " +
                 "WHERE \"date\" = @date";
 
             NpgsqlCommand cmd = new NpgsqlCommand(sql, _connection);
