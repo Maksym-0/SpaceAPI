@@ -1,0 +1,8 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "./SpaceAPI/Dockerfile"
+
+[deploy]
+startCommand = "dotnet SpaceAPI.dll"
+restartPolicyType = "always"
+healthcheckPath = "/health"
