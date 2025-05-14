@@ -1,6 +1,6 @@
 [build]
 builder = "dockerfile"
-dockerfilePath = "./SpaceAPI/Dockerfile"
+dockerfilePath = "Dockerfile"
 
 [deploy]
 startCommand = "dotnet SpaceAPI.dll"
