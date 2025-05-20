@@ -1,0 +1,26 @@
+name: CI for SpaceAPI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore SpaceAPI.csproj
+
+      - name: Build project
+        run: dotnet build SpaceAPI.csproj --no-restore --configuration Release
+        
